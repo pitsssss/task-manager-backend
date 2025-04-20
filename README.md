@@ -21,5 +21,5 @@ This is a Laravel 11-based web application designed for managing users, tasks, a
 - **MySQL** or compatible database
 - **Composer** & **npm** for dependency management
 
-## 📂 Project Structure
+
 
