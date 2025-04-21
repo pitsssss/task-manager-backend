@@ -9,28 +9,14 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-/**
- * Class User
- * 
- * @property int $id
- * @property string $name
- * @property string $email
- * @property string $Role
- * @property Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * 
- * @property Collection|Favorite[] $favorites
- * @property Collection|Profile[] $profiles
- * @property Collection|Task[] $tasks
- *
- * @package App\Models
- */
-class User extends Model
+class User extends Authenticatable
 {
+    use HasApiTokens,Notifiable;
+
 	protected $table = 'users';
 
 	protected $casts = [
@@ -51,10 +37,11 @@ class User extends Model
 		'remember_token'
 	];
 
-	public function favorites()
-	{
-		return $this->hasMany(Favorite::class);
-	}
+public function favoriteTasks()
+{
+    return $this->belongsToMany(Task::class, 'favorites');
+}
+
 
 	public function profiles()
 	{

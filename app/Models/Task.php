@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Task
- * 
+ *
  * @property int $id
  * @property int $user_id
  * @property string $Title
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $Priority
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property User $user
  * @property Collection|Category[] $categories
  * @property Collection|Favorite[] $favorites
@@ -49,13 +49,12 @@ class Task extends Model
 
 	public function categories()
 	{
-		return $this->belongsToMany(Category::class)
-					->withPivot('id')
-					->withTimestamps();
+		return $this->belongsToMany(Category::class,"category_task");
+
 	}
 
 	public function favorites()
 	{
-		return $this->hasMany(Favorite::class);
+		return $this->belongsToMany(User::class,"favorites");
 	}
 }

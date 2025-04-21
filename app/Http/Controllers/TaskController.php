@@ -57,7 +57,7 @@ class TaskController extends Controller {
         } catch ( ModelNotFoundException $e ) {
             return response()->json( [
                 'Error'=> 'Task Not Found',
-                ,'Details'=>$e->getMessage() ], 404);
+                'Details'=>$e->getMessage() ], 404);
         }
     }
 
